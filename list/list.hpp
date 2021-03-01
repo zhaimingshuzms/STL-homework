@@ -21,9 +21,9 @@ namespace sjtu {
             }
         };
 
-        node *_head;
-        node *_tail;
-        size_t _size;
+        node *_head=nullptr;
+        node *_tail=nullptr;
+        size_t _size=0;
     public:
         class iterator{
             node *pos;
