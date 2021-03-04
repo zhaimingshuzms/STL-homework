@@ -43,6 +43,9 @@ namespace sjtu {
             node *pos;
             size_t ind;
         public:
+            list<T> * RT() const{
+                return rt;
+            }
             iterator():rt(nullptr),pos(nullptr),ind(0){
             }
             iterator(list<T> * const & rt,node * const & p,const size_t & i):rt(rt),pos(p),ind(i){
@@ -105,7 +108,7 @@ namespace sjtu {
             T * operator ->() const{
                 return pos->value;
             }
-            bool available(){
+            bool available() const{
                 return pos!=nullptr;
             }
             bool operator ==(const iterator &it) const{
@@ -113,6 +116,9 @@ namespace sjtu {
             }
             bool operator !=(const iterator &it) const{
                 return pos!=it.pos||ind!=it.ind;
+            }
+            void print(){
+                std::cout<<rt<<" "<<pos<<" "<<ind;
             }
         };
         list():_head(nullptr),_tail(nullptr),_size(0){
@@ -175,9 +181,8 @@ namespace sjtu {
             }
             else if (p==end()){
                 node *tmp=new node(v);
-                link(tail(),iterator(this,tmp,_size));
+                link(tail(),ret=iterator(this,tmp,_size));//need to care and think
                 _tail=tmp;
-                ret=tail();
             }
             else if (p==begin()){
                 node *tmp=new node(v);

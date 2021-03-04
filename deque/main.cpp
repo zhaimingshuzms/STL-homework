@@ -158,6 +158,36 @@ void test3(){
     puts("Accept");
 }
 
+void test4(){
+    printf("test4: const_itetator operation      ");
+    const sjtu::deque<T> _q(q);
+    const std::deque<T> _stl(stl);
+    int num = _q.size();
+    for(int i =1 ; i <= 1000; i++)
+    {
+        int t1 = rand() % num;
+        int t2 = rand() % num;
+        if(*(_q.cbegin() + t1) != *(_stl.cbegin() + t1)){puts("Wrong Answer");return;}
+        if(t2 && *(_q.cend() - t2) != *(_stl.cend() - t2)){puts("Wrong Answer");return;}
+        if((_q.cbegin() + t1) - (_q.cbegin() + t2) != (t1 - t2)){puts("Wrong Answer");return;}
+    }
+    if((_q.cbegin() + num) != _q.cend()) {puts("Wrong Answer");return;}
+    if((_q.cend() - num) != _q.cbegin()) {puts("Wrong Answer");return;}
+    _it_q = _q.cbegin();
+    _it_stl = _stl.cbegin();
+    for(int i=1;i<=10;i++){
+        int t = rand() % (num / 10);
+        _it_q += t;
+        _it_stl += t;
+        if(*_it_q != *_it_stl) {puts("Wrong Answer");return;}
+        if(_it_q -> num() != _it_stl -> num()) {puts("Wrong Answer");return;}
+    }
+    _it_q = --_q.cend();
+    _it_stl = --_stl.cend();
+    if(*_it_q != *_it_stl) {puts("Wrong Answer");return;}
+    if (!(_q.cbegin() + 10 == _q.cbegin() +5 + 6 - 1)) {puts("Wrong Answer");return;}
+    puts("Accept");
+}
 
 void test5(){
     printf("test5: erase & insert                ");
@@ -287,7 +317,7 @@ int main(){
     test1();//push & pop
     test2();//at & [] & front & back
     test3();//iterator operation
-    //test4();//const_iterator operation
+    test4();//const_iterator operation
     test5();//erase & insert
     test6();//clear & copy & assignment
     test7();//complexity
